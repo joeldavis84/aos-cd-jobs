@@ -79,7 +79,7 @@ def mockParam() {
 def ocpVersionParam(name='MINOR_VERSION', majorVersion='all') {
     return [
         name: name,
-        description: 'OSE Version',
+        description: 'OSA Version',
         $class: 'hudson.model.ChoiceParameterDefinition',
         choices: ocpMajorVersions[majorVersion].join('\n'),
         defaultValue: ocpMajorDefaultVersion[majorVersion],
