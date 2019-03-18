@@ -21,6 +21,12 @@ ocp4Versions = [
     "4.0",
 ]
 
+ocpAzureVersions = [
+
+    "dev"
+
+]
+
 ocpMergeVersions = [
     "4.1",
     "4.0",
@@ -35,6 +41,7 @@ ocpVersions = ocp4Versions + ocp3Versions
 ocpMajorVersions = [
     "4": ocp4Versions,
     "3": ocp3Versions,
+    "azure": ocpAzureVersions,
     "all": ocpVersions,
 ]
 ocpMajorDefaultVersion = [

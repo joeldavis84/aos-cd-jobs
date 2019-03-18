@@ -14,7 +14,7 @@ node {
             [
                 $class: 'ParametersDefinitionProperty',
                 parameterDefinitions: [
-                    commonlib.ocpVersionParam('BUILD_VERSION'),
+                    commonlib.ocpVersionParam('BUILD_VERSION', 'azure'),
                     [
                         name: 'VERSION',
                         description: 'Version string for build (e.g. 4.0.0)',
