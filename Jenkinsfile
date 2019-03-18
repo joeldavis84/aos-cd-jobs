@@ -64,15 +64,7 @@ node {
                         description: 'Success Mailing List',
                         $class: 'hudson.model.StringParameterDefinition',
                         defaultValue: [
-                            'aos-team-art@redhat.com',
-                        ].join(',')
-                    ],
-                    [
-                        name: 'MAIL_LIST_FAILURE',
-                        description: 'Failure Mailing List',
-                        $class: 'hudson.model.StringParameterDefinition',
-                        defaultValue: [
-                            'aos-team-art@redhat.com',
+                            'aos-azure@redhat.com',
                         ].join(',')
                     ],
                     commonlib.mockParam(),
