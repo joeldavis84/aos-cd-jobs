@@ -1,6 +1,7 @@
 node {
     checkout scm
     def commonlib = load("pipeline-scripts/commonlib.groovy")
+    def releaseDate = new Date()
 
     // Expose properties for a parameterized build
     properties(
@@ -19,7 +20,7 @@ node {
                         name: 'RELEASE',
                         description: 'Release string for build',
                         $class: 'hudson.model.StringParameterDefinition',
-                        defaultValue: ""
+                        defaultValue: releaseDate.getTime()
                     ],
                     [
                         name: 'SKIP_OSE',
