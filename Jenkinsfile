@@ -20,7 +20,7 @@ node {
                         name: 'RELEASE',
                         description: 'Release string for build',
                         $class: 'hudson.model.StringParameterDefinition',
-                        defaultValue: releaseDate.getTime()
+                        defaultValue: 'fdg'
                     ],
                     [
                         name: 'SKIP_OSE',
