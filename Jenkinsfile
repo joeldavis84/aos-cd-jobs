@@ -2,6 +2,7 @@ node {
     checkout scm
     def commonlib = load("pipeline-scripts/commonlib.groovy")
     def releaseDate = new Date()
+    def fullDate = releaseDate.format("yyMMdd.HHmm", TimeZone.getTimeZone('UTC'))
 
     // Expose properties for a parameterized build
     properties(
