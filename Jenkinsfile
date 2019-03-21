@@ -21,7 +21,7 @@ node {
                         name: 'RELEASE',
                         description: 'Release string for build',
                         $class: 'hudson.model.StringParameterDefinition',
-                        defaultValue: 'fdg'
+                        defaultValue: 'fdg33'
                     ],
                     [
                         name: 'SKIP_OSE',
