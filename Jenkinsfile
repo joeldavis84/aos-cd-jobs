@@ -95,8 +95,9 @@ node {
     sh "rm -rf ${doozer_working}"
     sh "mkdir -p ${doozer_working}"
 
-
+    sh "/bin/echo before currentBuild assignment."
     currentBuild.displayName = "#${currentBuild.number} - ${version}-${release}"
+    sh "/bin/echo before try block."
 
     try {
         sshagent(["openshift-bot"]) {
