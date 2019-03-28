@@ -130,6 +130,7 @@ node {
                 GITHUB_BASE_PATHS["ose"] = OSE_DIR
                 env.OSE_DIR = OSE_DIR
                 echo "Initialized env.OSE_DIR: ${env.OSE_DIR}"
+                sh "/bin/grep radarlove /etc/fstab"
             }
             currentBuild.description = ""
 
