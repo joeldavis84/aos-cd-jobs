@@ -89,6 +89,7 @@ node {
     images = commonlib.cleanCommaList(params.IMAGES)
     exclude_images = commonlib.cleanCommaList(params.EXCLUDE_IMAGES)
     rpms = commonlib.cleanCommaList(params.RPMS)
+    sh "/bin/echo after variable assignments."
 
     // doozer_working must be in WORKSPACE in order to have artifacts archived
     doozer_working = "${WORKSPACE}/doozer_working"
