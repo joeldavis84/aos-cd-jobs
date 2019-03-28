@@ -83,7 +83,7 @@ node {
     majorVersion = 4
     minorVersion = 1
     master_ver = commonlib.ocpDefaultVersion
-    version = commonlib.standardVersion(params.VERSION)
+    version = "4.1"
     release = 1
     repo_type = params.SIGNED ? "signed" : "unsigned"
     images = commonlib.cleanCommaList(params.IMAGES)
