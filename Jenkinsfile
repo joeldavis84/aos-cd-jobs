@@ -80,8 +80,8 @@ node {
     sh "/bin/echo after initialize."
     GITHUB_BASE = "git@github.com:openshift" // buildlib uses this global var
 
-    majorVersion = params.BUILD_VERSION.split('\\.')[0]
-    minorVersion = params.BUILD_VERSION.split('\\.')[1]
+    majorVersion = 4
+    minorVersion = 1
     master_ver = commonlib.ocpDefaultVersion
     version = commonlib.standardVersion(params.VERSION)
     release = params.RELEASE.trim()
