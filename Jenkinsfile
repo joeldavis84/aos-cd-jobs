@@ -117,7 +117,7 @@ node {
                 //   GITHUB_URLS["ose"]
                 //   GITHUB_BASE_PATHS["ose"]
                 buildlib.initialize_openshift_dir()
-                checkout_branch = "enterprise-${params.BUILD_VERSION}"
+                checkout_branch = "enterprise-4.0"
                 if(params.BUILD_VERSION == master_ver){ checkout_branch = "master"}
 
                 // since there's no merge and commit back, single depth is way faster
