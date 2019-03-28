@@ -77,6 +77,7 @@ node {
 
     def buildlib = load("pipeline-scripts/buildlib.groovy")
     buildlib.initialize(false)
+    sh "/bin/echo after initialize."
     GITHUB_BASE = "git@github.com:openshift" // buildlib uses this global var
 
     majorVersion = params.BUILD_VERSION.split('\\.')[0]
