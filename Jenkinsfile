@@ -21,7 +21,13 @@ node {
                         name: 'RELEASE',
                         description: 'Release string for build',
                         $class: 'hudson.model.StringParameterDefinition',
-                        defaultValue: "$fullDate"
+                        defaultValue: ""
+                    ],
+                    [
+                        name: 'MAJORMINOR',
+                        description: 'The major and minor number for this build (e.g 4.0, 4.1, etc, etc)',
+                        $class: 'hudson.model.StringParameterDefinition',
+                        defaultValue: ""
                     ],
                     [
                         name: 'IMAGES',
