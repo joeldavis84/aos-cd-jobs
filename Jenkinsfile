@@ -24,12 +24,6 @@ node {
                         defaultValue: "$fullDate"
                     ],
                     [
-                        name: 'RPMS',
-                        description: 'CSV list of RPMs to build. Empty for all. Enter "NONE" to not build any.',
-                        $class: 'hudson.model.StringParameterDefinition',
-                        defaultValue: "NONE"
-                    ],
-                    [
                         name: 'IMAGES',
                         description: 'CSV list of images to build. Empty for all. Enter "NONE" to not build any.',
                         $class: 'hudson.model.StringParameterDefinition',
@@ -82,7 +76,6 @@ node {
     repo_type = params.SIGNED ? "signed" : "unsigned"
     images = commonlib.cleanCommaList(params.IMAGES)
     exclude_images = commonlib.cleanCommaList(params.EXCLUDE_IMAGES)
-    rpms = commonlib.cleanCommaList(params.RPMS)
     sh "/bin/echo after variable assignments."
 
     // doozer_working must be in WORKSPACE in order to have artifacts archived
@@ -103,39 +96,6 @@ node {
             // Instead of trying to figure out which do, always clone
             
             currentBuild.description = ""
-
-            stage("rpm builds") {
-                if (rpms.toUpperCase() != "NONE") {
-                    sh "/bin/grep radarlove /etc/fstab"
-                    currentBuild.displayName += rpms.contains(",") ? " [RPMs]" : " [${rpms} RPM]"
-                    currentBuild.description = "building RPM(s): ${rpms}\n"
-                    command = "--working-dir ${doozer_working} --group 'openshift-${params.BUILD_VERSION}' "
-                    if (rpms) { command += "-r '${rpms}' " }
-                    if (!params.SKIP_OSE) { command += "--source ose ${OSE_DIR} " }
-                    command += "rpms:build --version ${version} --release ${release} "
-                    buildlib.doozer command
-                }
-            }
-
-            stage("puddle: ose 'building'") {
-                if (rpms.toUpperCase() != "NONE") {
-                    AOS_CD_JOBS_COMMIT_SHA = sh(
-                        returnStdout: true,
-                        script: "git rev-parse HEAD",
-                    ).trim()
-                    PUDDLE_CONF_BASE = "https://raw.githubusercontent.com/openshift/aos-cd-jobs/${AOS_CD_JOBS_COMMIT_SHA}/build-scripts/puddle-conf"
-                    PUDDLE_CONF = "${PUDDLE_CONF_BASE}/atomic_openshift-${params.BUILD_VERSION}.conf"
-                    OCP_PUDDLE = buildlib.build_puddle(
-                        PUDDLE_CONF,    // The puddle configuration file to use
-                        null, // openshifthosted key
-                        "-b",   // do not fail if we are missing dependencies
-                        "-d",   // print debug information
-                        "-n",   // do not send an email for this puddle
-                        "-s",   // do not create a "latest" link since this puddle is for building images
-                        "--label=building"   // create a symlink named "building" for the puddle
-                    )
-                }
-            }
 
             // determine which images, if any, should be built, and how to tell doozer that
             include_exclude = ""
