@@ -121,7 +121,6 @@ node {
                 if (params.IMAGE_MODE == "nothing") { return }
 
                 command = "--working-dir ${doozer_working} --group '${BUILD_VERSION}' "
-                if (!params.SKIP_OSE) { command += "--source ose ${OSE_DIR} " }
                 command += "--latest-parent-version ${include_exclude} "
                 command += "images:${params.IMAGE_MODE} --version ${version} --release ${release} "
                 command += "--repo-type ${repo_type} "
