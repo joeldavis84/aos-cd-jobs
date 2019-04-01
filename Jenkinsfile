@@ -129,7 +129,7 @@ node {
             stage("build images") {
                 
                 if (!any_images_to_build) { return }
-                command = "--working-dir ${doozer_working} --group 'openshift-${params.BUILD_VERSION}' "
+                command = "--working-dir ${doozer_working} --group '${params.BUILD_VERSION}' "
                 command += "${include_exclude} images:build --push-to-defaults --repo-type ${repo_type} "
                 try {
                     buildlib.doozer command
