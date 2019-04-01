@@ -99,7 +99,6 @@ node {
 
             currentBuild.description = ""
 
-            echo "ping 1"
             // determine which images, if any, should be built, and how to tell doozer that
             include_exclude = ""
             any_images_to_build = true
@@ -113,7 +112,6 @@ node {
                 currentBuild.displayName += images.contains(",") ? " [images]" : " [${images} image]"
             }
 
-            echo "ping 2"
             stage("update dist-git") {
                 if (!any_images_to_build) { return }
                 currentBuild.description += "building image(s): ${include_exclude ?: 'all'}"
@@ -129,7 +127,7 @@ node {
             }
 
             stage("build images") {
-                return
+                
                 if (!any_images_to_build) { return }
                 command = "--working-dir ${doozer_working} --group 'openshift-${params.BUILD_VERSION}' "
                 command += "${include_exclude} images:build --push-to-defaults --repo-type ${repo_type} "
