@@ -18,14 +18,14 @@ node {
                 parameterDefinitions: [
                     commonlib.ocpVersionParam('BUILD_VERSION', 'azure'),
                     [
-                        name: 'RELEASE',
-                        description: 'Release string for build',
+                        name: 'VERSION',
+                        description: 'The major and minor number for this build (e.g 4.0, 4.1, etc, etc)',
                         $class: 'hudson.model.StringParameterDefinition',
                         defaultValue: ""
                     ],
                     [
-                        name: 'MAJORMINOR',
-                        description: 'The major and minor number for this build (e.g 4.0, 4.1, etc, etc)',
+                        name: 'RELEASE',
+                        description: 'Release string for build',
                         $class: 'hudson.model.StringParameterDefinition',
                         defaultValue: ""
                     ],
@@ -73,11 +73,11 @@ node {
     buildlib.initialize(false)
     GITHUB_BASE = "git@github.com:openshift" // buildlib uses this global var
 
-    majorVersion = 4
-    minorVersion = 1
+    majorVersion = params.BUILD_VERSION.split('\\.')[0]
+    minorVersion = params.BUILD_VERSION.split('\\.')[1]
     master_ver = commonlib.ocpDefaultVersion
-    version = "4.1"
-    release = 1
+    version = commonlib.standardVersion(params.VERSION)
+    release = params.RELEASE.trim()
     repo_type = params.SIGNED ? "signed" : "unsigned"
     images = commonlib.cleanCommaList(params.IMAGES)
     exclude_images = commonlib.cleanCommaList(params.EXCLUDE_IMAGES)
