@@ -23,7 +23,7 @@ ocp4Versions = [
 
 ocpAzureVersions = [
 
-    "dev"
+    "azure-dev"
 
 ]
 
