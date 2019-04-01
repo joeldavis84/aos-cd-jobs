@@ -71,7 +71,6 @@ node {
 
     def buildlib = load("pipeline-scripts/buildlib.groovy")
     buildlib.initialize(false)
-    sh "/bin/echo after initialize."
     GITHUB_BASE = "git@github.com:openshift" // buildlib uses this global var
 
     majorVersion = 4
@@ -82,17 +81,14 @@ node {
     repo_type = params.SIGNED ? "signed" : "unsigned"
     images = commonlib.cleanCommaList(params.IMAGES)
     exclude_images = commonlib.cleanCommaList(params.EXCLUDE_IMAGES)
-    sh "/bin/echo after variable assignments."
 
-    // doozer_working must be in WORKSPACE in order to have artifacts archived
+      // doozer_working must be in WORKSPACE in order to have artifacts archived
     doozer_working = "${WORKSPACE}/doozer_working"
     //Clear out previous workspace
     sh "rm -rf ${doozer_working}"
     sh "mkdir -p ${doozer_working}"
 
-    sh "/bin/echo before currentBuild assignment."
     currentBuild.displayName = "#${currentBuild.number} - ${version}-${release}"
-    sh "/bin/echo before try block."
 
     try {
         sshagent(["openshift-bot"]) {
@@ -100,7 +96,7 @@ node {
 
             // Some images require OSE as a source.
             // Instead of trying to figure out which do, always clone
-            
+
             currentBuild.description = ""
 
             // determine which images, if any, should be built, and how to tell doozer that
@@ -131,6 +127,7 @@ node {
             }
 
             stage("build images") {
+                return
                 if (!any_images_to_build) { return }
                 command = "--working-dir ${doozer_working} --group 'openshift-${params.BUILD_VERSION}' "
                 command += "${include_exclude} images:build --push-to-defaults --repo-type ${repo_type} "
