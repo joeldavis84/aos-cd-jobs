@@ -115,6 +115,7 @@ node {
             stage("update dist-git") {
                 if (!any_images_to_build) { return }
                 currentBuild.description += "building image(s): ${include_exclude ?: 'all'}"
+                echo "Build Description: ${currentBuild.description}"
                 if (params.IMAGE_MODE == "nothing") { return }
 
                 command = "--working-dir ${doozer_working} --group '${BUILD_VERSION}' "
